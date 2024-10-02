@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Programming Assignment 2: Hello Rails
 
-Things you may want to cover:
+Name: Likhith Majjigapu
+UIN: 836000187
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Heroku app link: [https://rottenpotatoes-likhith-ce9dc45eeeac.herokuapp.com/movies](https://rottenpotatoes-likhith-ce9dc45eeeac.herokuapp.com/movies)
