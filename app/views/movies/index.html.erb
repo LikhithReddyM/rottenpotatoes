@@ -2,41 +2,44 @@
 
 <% content_for :title, "Movies" %>
 
-<h1>Movies</h1>
+<h1>List of Movies</h1>
+
+<p><l>Note: Click on the header of the table to sort according to the feild.</l>
+<l>Click again to sort in reverse order.</l></p>
 
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-striped">
+      <table class="table table-striped table-bordered table-hover">
         <thead>
           <tr>
-            <th>
+            <th class="<%= 'sorted-' + params[:direction] if params[:sort] == 'title' %>">
               <%= link_to "Title", movies_path(sort: "title", direction: params[:direction] == "asc" ? "desc" : "asc") %>
               <% if params[:sort] == "title" %>
                 <% if params[:direction] == "asc" %>
-                  <span style="color: #CCCCCC">&#8597;</span>
+                  <span style="color: blue">&#8593;</span>
                 <% else %>
-                  <span style="color: #444444">&#8593;</span>
+                  <span style="color: red">&#8595;</span>
                 <% end %>
               <% end %>
             </th>
-            <th>
+            <th class="<%= 'sorted-' + params[:direction] if params[:sort] == 'rating' %>">
               <%= link_to "Rating", movies_path(sort: "rating", direction: params[:direction] == "asc" ? "desc" : "asc") %>
               <% if params[:sort] == "rating" %>
                 <% if params[:direction] == "asc" %>
-                  <span style="color: #CCCCCC">&#8597;</span>
+                  <span style="color: blue">&#8593;</span>
                 <% else %>
-                  <span style="color: #444444">&#8593;</span>
+                  <span style="color: red">&#8595;</span>
                 <% end %>
               <% end %>
             </th>
-            <th>
+            <th class="<%= 'sorted-' + params[:direction] if params[:sort] == 'release_date' %>">
               <%= link_to "Release Date", movies_path(sort: "release_date", direction: params[:direction] == "asc" ? "desc" : "asc") %>
               <% if params[:sort] == "release_date" %>
                 <% if params[:direction] == "asc" %>
-                  <span style="color: #CCCCCC">&#8597;</span>
+                  <span style="color: blue">&#8593;</span>
                 <% else %>
-                  <span style="color: #444444">&#8593;</span>
+                  <span style="color: red">&#8595;</span>
                 <% end %>
               <% end %>
             </th>
@@ -46,24 +49,23 @@
         <tbody>
           <% @movies.each do |movie| %>
             <tr>
-              <td><%= movie.title %></td>
-              <td><%= movie.rating %></td>
-              <td><%= movie.release_date %></td>
+              <td class="<%= 'sorted-' + params[:direction] if params[:sort] == 'title' %>"><%= movie.title %></td>
+              <td class="<%= 'sorted-' + params[:direction] if params[:sort] == 'rating' %>"><%= movie.rating %></td>
+              <td class="<%= 'sorted-' + params[:direction] if params[:sort] == 'release_date' %>"><%= movie.release_date %></td>
               <td>
-                <%= link_to "Show", movie %> |
-                <%= link_to "Edit", edit_movie_path(movie) %> |
-                <%= button_to "Destroy", movie, method: :delete %>
+                <%= link_to "View", movie_path(movie, params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-secondary" %>  
+                <%= link_to "Edit", edit_movie_path(movie, params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-secondary" %> 
+                <%= button_to "Delete", movie, method: :delete, class: "destroy-secondary" %>
               </td>
             </tr>
           <% end %>
         </tbody>
+        <tfoot>
+          <td colspan="4" style="padding-top:20px;border: none;">
+            <%= link_to "Add a movie", new_movie_path(params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-primary" %>
+          </td>
+        </tfoot>
       </table>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to "New movie", new_movie_path, class: "btn btn-primary" %>
   </div>
 </div>

@@ -1,32 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Movie</h1>
+<h1>Movie Info</h1>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <p>
-        <strong>Title:</strong>
-        <%= @movie.title %>
-      </p>
-
-      <p>
-        <strong>Rating:</strong>
-        <%= @movie.rating %>
-      </p>
-
-      <p>
-        <strong>Release Date:</strong>
-        <%= @movie.release_date %>
-      </p>
-    </div>
-  </div>
+  <%= render @movie %>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-primary" %> |
-    <%= link_to "Back to movies", movies_path, class: "btn btn-secondary" %> |
-    <%= button_to "Destroy", @movie, method: :delete, class: "btn btn-danger" %>
+    <%= link_to "Edit", edit_movie_path(@movie, params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-primary" %>    
+    <%= link_to "Back to movies", movies_path(params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-primary" %> 
+    <%= button_to "Delete movie", @movie, method: :delete, class: "destroy-primary" %>
   </div>
 </div>

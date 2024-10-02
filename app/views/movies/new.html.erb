@@ -1,6 +1,6 @@
 <% content_for :title, "New movie" %>
 
-<h1>New movie</h1>
+<h1>Add a Movie</h1>
 
 <div class="container">
   <div class="row">
@@ -12,6 +12,6 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Back to movies", movies_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to movies", movies_path(params: { sort: cookies[:sort], direction: cookies[:direction] }), class: "btn btn-primary" %>
   </div>
 </div>
