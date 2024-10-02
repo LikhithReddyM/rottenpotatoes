@@ -4,13 +4,66 @@
 
 <h1>Movies</h1>
 
-<div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              <%= link_to "Title", movies_path(sort: "title", direction: params[:direction] == "asc" ? "desc" : "asc") %>
+              <% if params[:sort] == "title" %>
+                <% if params[:direction] == "asc" %>
+                  <span style="color: #CCCCCC">&#8597;</span>
+                <% else %>
+                  <span style="color: #444444">&#8593;</span>
+                <% end %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to "Rating", movies_path(sort: "rating", direction: params[:direction] == "asc" ? "desc" : "asc") %>
+              <% if params[:sort] == "rating" %>
+                <% if params[:direction] == "asc" %>
+                  <span style="color: #CCCCCC">&#8597;</span>
+                <% else %>
+                  <span style="color: #444444">&#8593;</span>
+                <% end %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to "Release Date", movies_path(sort: "release_date", direction: params[:direction] == "asc" ? "desc" : "asc") %>
+              <% if params[:sort] == "release_date" %>
+                <% if params[:direction] == "asc" %>
+                  <span style="color: #CCCCCC">&#8597;</span>
+                <% else %>
+                  <span style="color: #444444">&#8593;</span>
+                <% end %>
+              <% end %>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @movies.each do |movie| %>
+            <tr>
+              <td><%= movie.title %></td>
+              <td><%= movie.rating %></td>
+              <td><%= movie.release_date %></td>
+              <td>
+                <%= link_to "Show", movie %> |
+                <%= link_to "Edit", edit_movie_path(movie) %> |
+                <%= button_to "Destroy", movie, method: :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New movie", new_movie_path %>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "New movie", new_movie_path, class: "btn btn-primary" %>
+  </div>
+</div>
